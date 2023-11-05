@@ -22,9 +22,33 @@ public class ExpenseTracker {
         System.out.print("Name: ");
         String name = sc.nextLine();
         System.out.print("Age: ");
-        int age = Integer.parseInt(sc.nextLine());
-        System.out.print("Phone Number: ");
-        String phno = sc.nextLine();
+        int age = 0;
+        boolean validAgeInput = false;
+
+        while (!validAgeInput) {
+            System.out.print("Age: ");
+            String ageInput = sc.nextLine();
+
+            if (ageInput.matches("\\d+")) {
+                age = Integer.parseInt(ageInput);
+                validAgeInput = true;
+            } else {
+                System.out.println("Invalid age input. Please enter a valid number.");
+            }
+        }
+        String phno = "";
+        boolean validPhoneNumber = false;
+
+        while (!validPhoneNumber) {
+            System.out.print("Phone Number: ");
+            phno = sc.nextLine();
+
+            if (phno.matches("\\d{10}")) {
+                validPhoneNumber = true;
+            } else {
+                System.out.println("Invalid phone number. Please enter a 10-digit numeric phone number.");
+            }
+        }
         System.out.print("Address: ");
         String address = sc.nextLine();
 
@@ -64,9 +88,25 @@ public class ExpenseTracker {
                             System.out.print("Edit your name: ");
                             name = sc.nextLine();
                             System.out.print("Edit your age: ");
-                            age = Integer.parseInt(sc.nextLine());
+                            String editedAgeInput = sc.nextLine();
+
+                            if (editedAgeInput.matches("\\d+")) {
+                                age = Integer.parseInt(editedAgeInput);
+                            } else {
+                                System.out.println("Invalid age input. Please enter a valid number.");
+                                continue;
+                            }
+
                             System.out.print("Edit your phone number: ");
-                            phno = sc.nextLine();
+                            String editedPhno = sc.nextLine();
+
+                            if (editedPhno.matches("\\d{10}")) {
+                                phno = editedPhno;
+                            } else {
+                                System.out.println("Invalid phone number. Please enter a 10-digit numeric phone number.");
+                                continue;
+                            }
+
                             System.out.print("Edit your address: ");
                             address = sc.nextLine();
 
