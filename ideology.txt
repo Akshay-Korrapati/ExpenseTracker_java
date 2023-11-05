@@ -1,0 +1,15 @@
+INITIAL: 
+
+Make an initial java program which can take input of the transactions of an individual, make an initial expenses class and a few sub-classes of it using inheritance. each subclass is of different type: 
+
+1. salary
+2. standard monthly expenses: 
+	1. rent
+	2. insurances
+	3. Maid etc.
+	4. loans
+3. Missilaneous
+
+Then we will make a main class which tracks and analyses the amount kept being used by the user on a regular basis and how is his performance based on his spending and income. 
+
+We will use a excel file or an sql file to keep track of the money flow. 
