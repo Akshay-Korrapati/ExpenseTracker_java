@@ -263,38 +263,40 @@ public class ExpenseTracker {
     private static int checkNumber(String x) {
         Scanner sc = new Scanner(System.in);
         boolean validInput = false;
+        int returnInput = 0;
     
         while (!validInput) {
             System.out.print("Enter " + x + ": ");
             String input = sc.nextLine();
     
             if (isNumeric(input)) {
-                int returnInput = Integer.parseInt(input);
-                return returnInput;
+                returnInput = Integer.parseInt(input);
+                validInput = true;
             } else {
                 System.out.println("Invalid input. Please enter a valid number:");
             }
         }
-        // You should never reach this point, so you should return something here to avoid a compilation error.
-        return -1; // You can return a default value or throw an exception if needed.
+        
+        return returnInput; 
     }
 
     private static String checkPhoneNumber(){
         Scanner sc = new Scanner(System.in);
         boolean validPhoneNumber = false;
+        String phno = "";
 
         while (!validPhoneNumber) {
             System.out.print("Phone Number: ");
-            String phno = sc.nextLine();
+            phno = sc.nextLine();
 
             if (phno.matches("\\d{10}")) {
-                return phno;
+                validPhoneNumber = true;
             } else {
                 System.out.println("Invalid phone number. Please enter a 10-digit numeric phone number:");
             }
         }
-        // You should never reach this point, so you should return something here to avoid a compilation error.
-        return "0"; // You can return a default value or throw an exception if needed.
+
+        return phno; 
     }
     
 }
