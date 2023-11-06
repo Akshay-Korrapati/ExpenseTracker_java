@@ -17,9 +17,11 @@ public class ExpenseTracker {
 
         System.out.print("Name: ");
         String name = sc.nextLine();
+
         int age = checkNumber("age");
 
         String phno = checkPhoneNumber();
+
         System.out.print("Address: ");
         String address = sc.nextLine();
 
@@ -55,16 +57,15 @@ public class ExpenseTracker {
                     System.out.println("Profile Menu");
                     System.out.println("1. Edit Profile");
                     System.out.println("2. Display Profile");
-                    System.out.print("Enter your choice: ");
                     int profileChoice = checkNumber("choice");
 
                     switch (profileChoice) {
                         case 1:
                             System.out.print("Edit your name: ");
                             name = sc.nextLine();
-                            System.out.print("Edit your age: ");
+                            System.out.print("Edit your age: \n");
                             age = checkNumber("age");
-                            System.out.print("Edit your phone number: ");
+                            System.out.print("Edit your phone number: \n");
                             phno = checkPhoneNumber();
                             System.out.print("Edit your address: ");
                             address = sc.nextLine();
@@ -90,7 +91,6 @@ public class ExpenseTracker {
                     System.out.println("2. Other Expense");
                     System.out.println("3. Timely Expense");
                     System.out.println("Enter any other number to backtrack");
-                    System.out.print("Enter your choice: ");
                     int expenseTypeChoice = checkNumber("choice");
 
                     if (expenseTypeChoice > 3 || expenseTypeChoice < 1) {
@@ -130,7 +130,6 @@ public class ExpenseTracker {
                     System.out.println("2. Gift Income");
                     System.out.println("3. Other Income");
                     System.out.println("Enter any other number to backtrack");
-                    System.out.print("Enter your choice: ");
                     int incomeTypeChoice = checkNumber("choice");
 
                     if (incomeTypeChoice > 3 || incomeTypeChoice < 1) {
@@ -168,7 +167,6 @@ public class ExpenseTracker {
                     System.out.println("2. Display Expenses by Date");
                     System.out.println("3. Display Total Amount of Expenses");
                     System.out.println("Enter any other number to backtrack");
-                    System.out.print("Enter your choice: ");
                     int displayExpenseChoice = checkNumber("choice");
 
                     switch (displayExpenseChoice) {
@@ -212,7 +210,6 @@ public class ExpenseTracker {
                     System.out.println("2. Display Incomes by Date");
                     System.out.println("3. Display Total Amount of Income");
                     System.out.println("Enter any other number to backtrack");
-                    System.out.print("Enter your choice: ");
                     int displayIncomeChoice = checkNumber("choice");
 
                     switch (displayIncomeChoice) {
