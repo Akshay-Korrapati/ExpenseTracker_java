@@ -8,6 +8,7 @@ import Pack4.*;
 import java.util.Scanner;
 
 public class ExpenseTracker {
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -16,34 +17,9 @@ public class ExpenseTracker {
 
         System.out.print("Name: ");
         String name = sc.nextLine();
-        int age = 0;
-        boolean validAgeInput = false;
+        int age = checkNumber("age");
 
-        while (!validAgeInput) {
-            System.out.print("Age: ");
-            String ageInput = sc.nextLine();
-
-            if (isNumeric(ageInput)) {
-                age = Integer.parseInt(ageInput);
-                validAgeInput = true;
-            } else {
-                System.out.println("Invalid age input. Please enter a valid number:");
-            }
-        }
-
-        String phno = "";
-        boolean validPhoneNumber = false;
-
-        while (!validPhoneNumber) {
-            System.out.print("Phone Number: ");
-            phno = sc.nextLine();
-
-            if (phno.matches("\\d{10}")) {
-                validPhoneNumber = true;
-            } else {
-                System.out.println("Invalid phone number. Please enter a 10-digit numeric phone number:");
-            }
-        }
+        String phno = checkPhoneNumber();
         System.out.print("Address: ");
         String address = sc.nextLine();
 
@@ -70,20 +46,7 @@ public class ExpenseTracker {
             System.out.println("5. Display Incomes");
             System.out.println("Any other number to exit");
 
-            boolean validChoice = false;
-            int choice = 0;
-
-            while (!validChoice) {
-                System.out.print("Enter your choice: ");
-                String choiceInput = sc.nextLine();
-
-                if (isNumeric(choiceInput)) {
-                    choice = Integer.parseInt(choiceInput);
-                    validChoice = true;
-                } else {
-                    System.out.println("Invalid choice input. Please enter a valid number:");
-                }
-            }
+            int choice = checkNumber("choice");
 
             System.out.print("\033[H\033[2J");
 
@@ -93,31 +56,16 @@ public class ExpenseTracker {
                     System.out.println("1. Edit Profile");
                     System.out.println("2. Display Profile");
                     System.out.print("Enter your choice: ");
-                    int profileChoice = Integer.parseInt(sc.nextLine());
+                    int profileChoice = checkNumber("choice");
 
                     switch (profileChoice) {
                         case 1:
                             System.out.print("Edit your name: ");
                             name = sc.nextLine();
                             System.out.print("Edit your age: ");
-                            String editedAgeInput = sc.nextLine();
-
-                            if (isNumeric(editedAgeInput)) {
-                                age = Integer.parseInt(editedAgeInput);
-                            } else {
-                                System.out.println("Invalid age input. Please enter a valid number:");
-                                continue;
-                            }
-
+                            age = checkNumber("age");
                             System.out.print("Edit your phone number: ");
-                            String editedPhno = sc.nextLine();
-
-                            if (editedPhno.matches("\\d{10}")) {
-                                phno = editedPhno;
-                            } else {
-                                System.out.println("Invalid phone number. Please enter a 10-digit numeric phone number:");
-                            }
-
+                            phno = checkPhoneNumber();
                             System.out.print("Edit your address: ");
                             address = sc.nextLine();
 
@@ -143,7 +91,7 @@ public class ExpenseTracker {
                     System.out.println("3. Timely Expense");
                     System.out.println("Enter any other number to backtrack");
                     System.out.print("Enter your choice: ");
-                    int expenseTypeChoice = Integer.parseInt(sc.nextLine());
+                    int expenseTypeChoice = checkNumber("choice");
 
                     if (expenseTypeChoice > 3 || expenseTypeChoice < 1) {
                         System.out.println("Going back to main menu\n");
@@ -152,19 +100,7 @@ public class ExpenseTracker {
 
                     System.out.print("Description: ");
                     String description = sc.nextLine();
-                    double amount = 0.0;
-                    boolean validAmount = false;
-                    while (!validAmount) {
-                        System.out.print("Amount (in Rs): ");
-                        String amountInput = sc.nextLine();
-
-                        if (isNumeric(amountInput)) {
-                            amount = Double.parseDouble(amountInput);
-                            validAmount = true;
-                        } else {
-                            System.out.println("Invalid amount input. Please enter a valid number.\n");
-                        }
-                    }
+                    double amount = checkNumber("Amount");
                     System.out.print("Date (YYYY-MM-DD): ");
                     String date = sc.nextLine();
 
@@ -195,23 +131,16 @@ public class ExpenseTracker {
                     System.out.println("3. Other Income");
                     System.out.println("Enter any other number to backtrack");
                     System.out.print("Enter your choice: ");
-                    int incomeTypeChoice = Integer.parseInt(sc.nextLine());
+                    int incomeTypeChoice = checkNumber("choice");
+
+                    if (incomeTypeChoice > 3 || incomeTypeChoice < 1) {
+                        System.out.println("Going back to main menu\n");
+                        break;
+                    }
 
                     System.out.print("Source: ");
                     String source = sc.nextLine();
-                    double incomeAmount = 0.0;
-                    boolean validIncomeAmount = false;
-                    while (!validIncomeAmount) {
-                        System.out.print("Amount (in Rs): ");
-                        String incomeAmountInput = sc.nextLine();
-
-                        if (isNumeric(incomeAmountInput)) {
-                            incomeAmount = Double.parseDouble(incomeAmountInput);
-                            validIncomeAmount = true;
-                        } else {
-                            System.out.println("Invalid amount input. Please enter a valid number.\n");
-                        }
-                    }
+                    double incomeAmount = checkNumber("Amount");
                     System.out.print("Date (YYYY-MM-DD): ");
                     String incomeDate = sc.nextLine();
 
@@ -224,9 +153,6 @@ public class ExpenseTracker {
                             break;
                         case 3:
                             incomes[incomeCount] = new OtherIncome(source, incomeAmount, incomeDate);
-                            break;
-                        default:
-                            System.out.println("Going back to main menu");
                             break;
                     }
 
@@ -243,7 +169,7 @@ public class ExpenseTracker {
                     System.out.println("3. Display Total Amount of Expenses");
                     System.out.println("Enter any other number to backtrack");
                     System.out.print("Enter your choice: ");
-                    int displayExpenseChoice = Integer.parseInt(sc.nextLine());
+                    int displayExpenseChoice = checkNumber("choice");
 
                     switch (displayExpenseChoice) {
                         case 1:
@@ -287,7 +213,7 @@ public class ExpenseTracker {
                     System.out.println("3. Display Total Amount of Income");
                     System.out.println("Enter any other number to backtrack");
                     System.out.print("Enter your choice: ");
-                    int displayIncomeChoice = Integer.parseInt(sc.nextLine());
+                    int displayIncomeChoice = checkNumber("choice");
 
                     switch (displayIncomeChoice) {
                         case 1:
@@ -336,4 +262,42 @@ public class ExpenseTracker {
     private static boolean isNumeric(String str) {
         return str.matches("-?\\d+(\\.\\d+)?");
     }
+
+    private static int checkNumber(String x) {
+        Scanner sc = new Scanner(System.in);
+        boolean validInput = false;
+    
+        while (!validInput) {
+            System.out.print("Enter " + x + ": ");
+            String input = sc.nextLine();
+    
+            if (isNumeric(input)) {
+                int returnInput = Integer.parseInt(input);
+                return returnInput;
+            } else {
+                System.out.println("Invalid input. Please enter a valid number:");
+            }
+        }
+        // You should never reach this point, so you should return something here to avoid a compilation error.
+        return -1; // You can return a default value or throw an exception if needed.
+    }
+
+    private static String checkPhoneNumber(){
+        Scanner sc = new Scanner(System.in);
+        boolean validPhoneNumber = false;
+
+        while (!validPhoneNumber) {
+            System.out.print("Phone Number: ");
+            String phno = sc.nextLine();
+
+            if (phno.matches("\\d{10}")) {
+                return phno;
+            } else {
+                System.out.println("Invalid phone number. Please enter a 10-digit numeric phone number:");
+            }
+        }
+        // You should never reach this point, so you should return something here to avoid a compilation error.
+        return "0"; // You can return a default value or throw an exception if needed.
+    }
+    
 }
