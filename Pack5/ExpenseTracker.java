@@ -1,14 +1,9 @@
 package Pack5;
 
-import Pack1.Expense;
-import Pack1.Income;
-import Pack2.OneTimeExpense;
-import Pack2.OtherExpense;
-import Pack2.TimelyExpense;
-import Pack3.SalaryIncome;
-import Pack3.GiftIncome;
-import Pack3.OtherIncome;
-import Pack4.Profile;
+import Pack1.*;
+import Pack2.*;
+import Pack3.*;
+import Pack4.*;
 
 import java.util.Scanner;
 
@@ -35,6 +30,7 @@ public class ExpenseTracker {
                 System.out.println("Invalid age input. Please enter a valid number:");
             }
         }
+
         String phno = "";
         boolean validPhoneNumber = false;
 
@@ -61,6 +57,7 @@ public class ExpenseTracker {
         int expenseCount = 0;
         int incomeCount = 0;
 
+        // To clear terminal screen, reffered tutorialpoints.com
         System.out.print("\033[H\033[2J");
 
         while (true) {
@@ -118,10 +115,7 @@ public class ExpenseTracker {
 
                         case 2:
                             System.out.println("Displaying Profile:");
-                            System.out.println("Name: " + userProfile.name);
-                            System.out.println("Age: " + userProfile.age);
-                            System.out.println("Phone Number: " + userProfile.phno);
-                            System.out.println("Address: " + userProfile.address + "\n");
+                            userProfile.displayProfile();
                             break;
 
                         default:
@@ -324,6 +318,7 @@ public class ExpenseTracker {
         }
     }
 
+    //Took from chat-gpt to check if the string contains only numeric values or no.
     private static boolean isNumeric(String str) {
         return str.matches("-?\\d+(\\.\\d+)?");
     }
