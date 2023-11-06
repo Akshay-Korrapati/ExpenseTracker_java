@@ -8,7 +8,7 @@ public class OtherIncome extends Income {
     }
 
     @Override
-    public void display() {
+    public void displayIncome() {
         System.out.println("Other Income from: " + source);
         System.out.println("Amount: " + amount);
         System.out.println("Date: " + date);

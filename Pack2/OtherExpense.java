@@ -8,7 +8,7 @@ public class OtherExpense extends Expense {
     }
 
     @Override
-    public void display() {
+    public void displayExpense() {
         System.out.println("Other Expense: " + description);
         System.out.println("Amount: " + amount);
         System.out.println("Date: " + date);

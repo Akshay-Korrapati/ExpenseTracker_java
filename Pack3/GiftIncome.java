@@ -9,7 +9,7 @@ public class GiftIncome extends Income {
     }
 
     @Override
-    public void display() {
+    public void displayIncome() {
         System.out.println("Gift Income from: " + source);
         System.out.println("Amount: " + amount);
         System.out.println("Date: " + date);

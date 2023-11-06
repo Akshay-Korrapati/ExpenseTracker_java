@@ -8,7 +8,7 @@ public class OneTimeExpense extends Expense {
     }
 
     @Override
-    public void display() {
+    public void displayExpense() {
         System.out.println("One-Time Expense: " + description);
         System.out.println("Amount: " + amount);
         System.out.println("Date: " + date);

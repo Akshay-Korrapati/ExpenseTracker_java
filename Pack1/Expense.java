@@ -11,5 +11,5 @@ public abstract class Expense {
         this.date = date;
     }
 
-    public abstract void display();
+    public abstract void displayExpense();
 }

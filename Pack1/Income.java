@@ -11,5 +11,5 @@ public abstract class Income {
         this.date = date;
     }
 
-    public abstract void display();
+    public abstract void displayIncome();
 }

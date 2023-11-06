@@ -12,7 +12,7 @@ public class TimelyExpense extends Expense {
     }
 
     @Override
-    public void display() {
+    public void displayExpense() {
         System.out.println("Timely Expense: " + description);
         System.out.println("Amount: " + amount);
         System.out.println("Date: " + date);
