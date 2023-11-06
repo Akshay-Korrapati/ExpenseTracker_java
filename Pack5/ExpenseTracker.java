@@ -69,8 +69,21 @@ public class ExpenseTracker {
             System.out.println("4. Display Expenses");
             System.out.println("5. Display Incomes");
             System.out.println("Any other number to exit");
-            System.out.print("Enter your choice: ");
-            int choice = Integer.parseInt(sc.nextLine());
+
+            boolean validChoice = false;
+            int choice = 0;
+
+            while (!validChoice) {
+                System.out.print("Enter your choice: ");
+                String choiceInput = sc.nextLine();
+
+                if (isNumeric(choiceInput)) {
+                    choice = Integer.parseInt(choiceInput);
+                    validChoice = true;
+                } else {
+                    System.out.println("Invalid choice input. Please enter a valid number:");
+                }
+            }
 
             System.out.print("\033[H\033[2J");
 
@@ -102,8 +115,7 @@ public class ExpenseTracker {
                             if (editedPhno.matches("\\d{10}")) {
                                 phno = editedPhno;
                             } else {
-                                System.out.println(
-                                        "Invalid phone number. Please enter a 10-digit numeric phone number:");
+                                System.out.println("Invalid phone number. Please enter a 10-digit numeric phone number:");
                             }
 
                             System.out.print("Edit your address: ");
@@ -132,6 +144,11 @@ public class ExpenseTracker {
                     System.out.println("Enter any other number to backtrack");
                     System.out.print("Enter your choice: ");
                     int expenseTypeChoice = Integer.parseInt(sc.nextLine());
+
+                    if (expenseTypeChoice > 3 || expenseTypeChoice < 1) {
+                        System.out.println("Going back to main menu\n");
+                        break;
+                    }
 
                     System.out.print("Description: ");
                     String description = sc.nextLine();
@@ -162,9 +179,6 @@ public class ExpenseTracker {
                             System.out.print("Frequency: ");
                             String frequency = sc.nextLine();
                             expenses[expenseCount] = new TimelyExpense(description, amount, date, frequency);
-                            break;
-                        default:
-                            System.out.println("Going back to main menu\n");
                             break;
                     }
 
@@ -318,7 +332,7 @@ public class ExpenseTracker {
         }
     }
 
-    //Took from chat-gpt to check if the string contains only numeric values or no.
+    // Took from chat-gpt to check if the string contains only numeric values or no.
     private static boolean isNumeric(String str) {
         return str.matches("-?\\d+(\\.\\d+)?");
     }
