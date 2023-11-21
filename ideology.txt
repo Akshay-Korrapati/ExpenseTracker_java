@@ -13,3 +13,14 @@ Make an initial java program which can take input of the transactions of an indi
 Then we will make a main class which tracks and analyses the amount kept being used by the user on a regular basis and how is his performance based on his spending and income. 
 
 We will use a excel file or an sql file to keep track of the money flow. 
+
+NEW Features: 
+
+1st menu: sign up, login, exit;
+sign up: take new profile details and send to menu 2. 
+login: ask for the profile number and password, if not correct show to options, try again and exit to sign up, else send to menu 2
+exit: terminate 
+
+2nd menu: 
+old features. 
+ 
