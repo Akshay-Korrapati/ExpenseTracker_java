@@ -10,7 +10,66 @@ import Pack3.GiftIncome;
 import Pack3.OtherIncome;
 import Pack4.Profile;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Scanner;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+public class DBConnection {
+    // JDBC URL, username, and password of MySQL server
+    private static final String JDBC_URL = "jdbc:mysql://127.0.0.1:3306/ExpenseTrackerDB";
+    private static final String USER = "root";
+    private static final String PASSWORD = "root1234";
+
+    static {
+        try {
+            // Register the JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            throw new RuntimeException(
+                    "Failed to load MySQL JDBC driver. Make sure to add the JDBC driver to your project.");
+        }
+    }
+
+    // Establish a connection to the database
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
+    }
+
+    // Inside the DBConnection class
+    public static void addExpense(String type, String description, double amount, String date, String frequency)
+            throws SQLException {
+        try (Connection connection = getConnection()) {
+            String query = "INSERT INTO Expenses (type, description, amount, date, frequency) VALUES (?, ?, ?, ?, ?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, type);
+                preparedStatement.setString(2, description);
+                preparedStatement.setDouble(3, amount);
+                preparedStatement.setString(4, date);
+                preparedStatement.setString(5, frequency);
+                preparedStatement.executeUpdate();
+            }
+        }
+    }
+
+    public static void addIncome(String type, String source, double amount, String date) throws SQLException {
+        try (Connection connection = getConnection()) {
+            String query = "INSERT INTO Incomes (type, source, amount, date) VALUES (?, ?, ?, ?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                preparedStatement.setString(1, type);
+                preparedStatement.setString(2, source);
+                preparedStatement.setDouble(3, amount);
+                preparedStatement.setString(4, date);
+                preparedStatement.executeUpdate();
+            }
+        }
+    }
+
+}
 
 public class ExpenseTracker {
     public static void main(String[] args) {
@@ -159,18 +218,22 @@ public class ExpenseTracker {
 
                     switch (expenseTypeChoice) {
                         case 1:
-                            expenses[expenseCount] = new OneTimeExpense(description, amount, date);
+                            // expenses[expenseCount] = new OneTimeExpense(description, amount, date);
+                            addExpenseToDatabase("One-Time Expense", description, amount, date);
                             break;
                         case 2:
-                            expenses[expenseCount] = new OtherExpense(description, amount, date);
+                            // expenses[expenseCount] = new OtherExpense(description, amount, date);
+                            addExpenseToDatabase("Other Expense", description, amount, date);
                             break;
                         case 3:
+                            // expenses[expenseCount] = new TimelyExpense(description, amount, date,
+                            // frequency);
                             System.out.print("Frequency: ");
                             String frequency = sc.nextLine();
-                            expenses[expenseCount] = new TimelyExpense(description, amount, date, frequency);
+                            addExpenseToDatabase("Timely Expense", description, amount, date, frequency);
                             break;
                         default:
-                            System.out.println("Going back to main menu\n");
+                            System.out.println("Going back to the main menu\n");
                             break;
                     }
 
@@ -209,16 +272,19 @@ public class ExpenseTracker {
 
                     switch (incomeTypeChoice) {
                         case 1:
-                            incomes[incomeCount] = new SalaryIncome(source, incomeAmount, incomeDate);
+                            // incomes[incomeCount] = new SalaryIncome(source, incomeAmount, incomeDate);
+                            addIncomeToDatabase("Salary Income", source, incomeAmount, incomeDate);
                             break;
                         case 2:
-                            incomes[incomeCount] = new GiftIncome(source, incomeAmount, incomeDate);
+                            // incomes[incomeCount] = new GiftIncome(source, incomeAmount, incomeDate);
+                            addIncomeToDatabase("Gift Income", source, incomeAmount, incomeDate);
                             break;
                         case 3:
-                            incomes[incomeCount] = new OtherIncome(source, incomeAmount, incomeDate);
+                            // incomes[incomeCount] = new OtherIncome(source, incomeAmount, incomeDate);
+                            addIncomeToDatabase("Other Income", source, incomeAmount, incomeDate);
                             break;
                         default:
-                            System.out.println("Going back to main menu");
+                            System.out.println("Going back to the main menu\n");
                             break;
                     }
 
